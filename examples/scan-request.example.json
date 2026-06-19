@@ -1,0 +1,11 @@
+{
+  "scanId": "a3f2e1d0-1234-4abc-8def-000000000001",
+  "repositoryUrl": "https://github.com/cerberus-riwi/cerberus-securitygate",
+  "branch": "develop",
+  "commitHash": "a3f2e1d0b4c5e6f7a8b9c0d1e2f3a4b5c6d7e8f9",
+  "requestedAt": "2026-06-18T14:30:00Z",
+  "metadata": {
+    "prNumber": 42,
+    "triggeredBy": "camilo.florez"
+  }
+}

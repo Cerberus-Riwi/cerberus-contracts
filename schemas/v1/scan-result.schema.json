@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://cerberus/schemas/v1/scan-result",
+  "title": "ScanResult",
+  "description": "Resultado que VulnerabilityService o CodeQualityService publica en RabbitMQ al finalizar su análisis. SecurityGate lo consume para consolidar el veredicto final.",
+  "type": "object",
+  "required": [
+    "scanId",
+    "serviceId",
+    "status",
+    "findings",
+    "completedAt"
+  ],
+  "properties": {
+    "scanId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Debe coincidir exactamente con el scanId del ScanRequest que originó este análisis. SecurityGate usa este campo para correlacionar mensajes."
+    },
+    "serviceId": {
+      "type": "string",
+      "enum": [
+        "vulnerability-service",
+        "codequality-service"
+      ],
+      "description": "Identificador del servicio que generó este resultado. Valor fijo por servicio — nunca dinámico."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failed",
+        "timeout"
+      ],
+      "description": "Estado de la ejecución. 'success' = análisis completado (puede tener findings vacíos). 'failed' = error interno. 'timeout' = superó el límite de tiempo."
+    },
+    "findings": {
+      "type": "array",
+      "description": "Lista de hallazgos de seguridad. Array vacío [] si no se encontraron problemas. NUNCA null.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "severity",
+          "title",
+          "ruleId",
+          "filePath"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Identificador único del hallazgo. Generado por el servicio con UUID v4."
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "critical",
+              "high",
+              "medium",
+              "low",
+              "info"
+            ],
+            "description": "Nivel de severidad del hallazgo según clasificación interna de Cerberus."
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "Título corto y descriptivo del hallazgo. Ejemplo: 'SQL Injection en parámetro de búsqueda'."
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2000,
+            "description": "Explicación detallada del hallazgo. Campo opcional pero recomendado."
+          },
+          "ruleId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "description": "Identificador de la regla que detectó el hallazgo. Formato sugerido: herramienta.CODIGO. Ejemplo: semgrep.CWE-089, gitleaks.aws-access-key."
+          },
+          "filePath": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Ruta relativa al archivo afectado desde la raíz del repositorio. Ejemplo: src/Controllers/SearchController.cs"
+          },
+          "lineStart": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Línea de inicio del hallazgo en el archivo. Campo opcional."
+          },
+          "lineEnd": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Línea de fin del hallazgo en el archivo. Debe ser >= lineStart. Campo opcional."
+          },
+          "recommendation": {
+            "type": "string",
+            "maxLength": 1000,
+            "description": "Recomendación de corrección para el desarrollador. Campo opcional pero recomendado."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp ISO 8601 en UTC del momento en que el servicio terminó el análisis."
+    },
+    "errorMessage": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Mensaje de error legible. OBLIGATORIO si status es 'failed' o 'timeout'. AUSENTE si status es 'success'."
+    }
+  },
+  "additionalProperties": false
+}

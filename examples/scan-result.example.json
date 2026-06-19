@@ -1,0 +1,30 @@
+{
+  "scanId": "a3f2e1d0-1234-4abc-8def-000000000001",
+  "serviceId": "vulnerability-service",
+  "status": "success",
+  "findings": [
+    {
+      "id": "b1c2d3e4-0001-4aaa-bbbb-111111111111",
+      "severity": "high",
+      "title": "SQL Injection detectado en parámetro de búsqueda",
+      "description": "El parámetro 'query' se concatena directamente en la consulta SQL sin sanitizar, permitiendo inyección de código SQL arbitrario.",
+      "ruleId": "semgrep.CWE-089",
+      "filePath": "src/Controllers/SearchController.cs",
+      "lineStart": 47,
+      "lineEnd": 47,
+      "recommendation": "Usar consultas parametrizadas con Entity Framework o Dapper en lugar de concatenación de strings."
+    },
+    {
+      "id": "c2d3e4f5-0002-4bbb-cccc-222222222222",
+      "severity": "medium",
+      "title": "Credencial expuesta en variable de entorno hardcodeada",
+      "description": "Se detectó una clave de AWS hardcodeada en el código fuente.",
+      "ruleId": "gitleaks.aws-access-key",
+      "filePath": "src/Services/StorageService.cs",
+      "lineStart": 12,
+      "lineEnd": 12,
+      "recommendation": "Mover la credencial a un Kubernetes Secret y leerla desde variables de entorno en runtime."
+    }
+  ],
+  "completedAt": "2026-06-18T14:31:45Z"
+}
