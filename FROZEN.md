@@ -15,7 +15,7 @@ Cualquier modificación requiere aprobación del líder técnico y nuevo tag.
 
 Cada integrante confirma que los contratos cubren los campos que su servicio necesita:
 
-- [ ] Ximena Jaramillo Cárdenas — SecurityGate
+- [x] Ximena Jaramillo Cárdenas — SecurityGate
 - [ ] Camilo Florez Moreno — Infraestructura / SecurityGate
 - [ ] Luis Miguel González — VulnerabilityService
 - [ ] Juan José Cadena — CodeQualityService
