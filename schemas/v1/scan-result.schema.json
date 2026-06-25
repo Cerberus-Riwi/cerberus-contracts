@@ -43,8 +43,7 @@
           "id",
           "severity",
           "title",
-          "ruleId",
-          "filePath"
+          "ruleId"
         ],
         "properties": {
           "id": {
@@ -84,6 +83,11 @@
             "type": "string",
             "minLength": 1,
             "description": "Ruta relativa al archivo afectado desde la raíz del repositorio. Ejemplo: src/Controllers/SearchController.cs"
+          },
+          "locationUrl": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL donde ZAP detectó la vulnerabilidad. Solo presente en hallazgos de DAST. Ejemplo: https://app.com/login. Mutuamente excluyente con filePath."
           },
           "lineStart": {
             "type": "integer",

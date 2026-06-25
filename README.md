@@ -65,6 +65,19 @@ El rollback en Kubernetes solo se activa cuando `verdict == "fail"`.
 
 ---
 
+## Convenciones de filePath por herramienta
+
+Cuando el hallazgo no proviene de un archivo del repositorio, usar estas convenciones
+de string para el campo `filePath`:
+
+| Herramienta | Formato | Ejemplo |
+|---|---|---|
+| Gitleaks | ruta real del archivo | `src/Services/StorageService.cs` |
+| Trivy filesystem | ruta real del archivo | `package.json` |
+| Trivy contenedor | `container:{imagen}/{paquete}` | `container:ubuntu:22.04/libssl` |
+
+---
+
 ## Regla de modificación
 
 Los schemas bajo `schemas/v1/` son **INAMOVIBLES** tras el congelamiento del día 2.
