@@ -17,7 +17,7 @@ Cada integrante confirma que los contratos cubren los campos que su servicio nec
 
 - [x] Ximena Jaramillo Cárdenas — SecurityGate
 - [ ] Camilo Florez Moreno — Infraestructura / SecurityGate
-- [ ] Luis Miguel González — VulnerabilityService
+- [x] Luis Miguel González — VulnerabilityService
 - [x] Juan José Cadena — CodeQualityService
 - [ ] Faiber Camacho — Frontend
 - [ ] Miguel Ángel — Servicio ML
