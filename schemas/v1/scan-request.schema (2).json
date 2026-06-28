@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://cerberus/schemas/v1/scan-request",
+  "title": "ScanRequest",
+  "description": "Mensaje que SecurityGate publica en RabbitMQ para iniciar el análisis de seguridad en los servicios consumidores.",
+  "type": "object",
+  "required": [
+    "scanId",
+    "repositoryUrl",
+    "branch",
+    "commitHash",
+    "requestedAt"
+  ],
+  "properties": {
+    "scanId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identificador único del escaneo. Generado por SecurityGate con UUID v4. Todos los mensajes del mismo escaneo comparten este valor."
+    },
+    "repositoryUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://github\\.com/.+/.+$",
+      "description": "URL HTTPS del repositorio en GitHub. No se aceptan URLs SSH."
+    },
+    "branch": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "description": "Nombre de la rama que disparó el evento de GitHub."
+    },
+    "commitHash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$",
+      "description": "Hash SHA-1 completo del commit (exactamente 40 caracteres hexadecimales en minúscula)."
+    },
+    "requestedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp ISO 8601 en UTC del momento en que SecurityGate creó este mensaje. Ejemplo: 2026-06-18T14:30:00Z"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Campos opcionales de contexto adicional. Nunca requeridos por los servicios consumidores.",
+      "properties": {
+        "prNumber": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Número del Pull Request si el evento fue un PR. Ausente si fue un push directo."
+        },
+        "triggeredBy": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Username de GitHub del usuario que hizo el push o abrió el PR."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

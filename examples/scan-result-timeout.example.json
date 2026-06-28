@@ -1,0 +1,8 @@
+{
+  "scanId": "a3f2e1d0-1234-4abc-8def-000000000001",
+  "serviceId": "codequality-service",
+  "status": "timeout",
+  "findings": [],
+  "completedAt": "2026-06-18T14:35:00Z",
+  "errorMessage": "El análisis superó el límite de 180 segundos. El repositorio puede ser demasiado grande o Semgrep no respondió."
+}

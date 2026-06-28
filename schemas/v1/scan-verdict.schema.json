@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://cerberus/schemas/v1/scan-verdict",
+  "title": "ScanVerdict",
+  "description": "Veredicto final consolidado que SecurityGate publica tras recibir todos los ScanResult. Lo consumen el Frontend (para el dashboard) y el Servicio ML (para análisis de patrones). También determina si se activa el rollback en Kubernetes.",
+  "type": "object",
+  "required": [
+    "scanId",
+    "verdict",
+    "summary",
+    "results",
+    "rollbackTriggered",
+    "issuedAt"
+  ],
+  "properties": {
+    "scanId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Mismo scanId del ScanRequest que originó todo el flujo."
+    },
+    "verdict": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "fail",
+        "warning"
+      ],
+      "description": "Veredicto final del Quality Gate. Reglas: 'fail' si critical > 0 O high > 0. 'warning' si critical == 0 Y high == 0 pero medium > 0 O low > 0. 'pass' si todos los conteos son 0 (solo puede haber info)."
+    },
+    "summary": {
+      "type": "object",
+      "description": "Conteo total de hallazgos por severidad, sumando todos los servicios que participaron.",
+      "required": [
+        "critical",
+        "high",
+        "medium",
+        "low",
+        "info"
+      ],
+      "properties": {
+        "critical": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total de hallazgos con severidad 'critical'."
+        },
+        "high": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total de hallazgos con severidad 'high'."
+        },
+        "medium": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total de hallazgos con severidad 'medium'."
+        },
+        "low": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total de hallazgos con severidad 'low'."
+        },
+        "info": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total de hallazgos con severidad 'info'. No afecta el veredicto."
+        }
+      },
+      "additionalProperties": false
+    },
+    "results": {
+      "type": "array",
+      "description": "Los ScanResult originales de cada servicio que participó en el escaneo. Mínimo 1, máximo 2 (uno por servicio).",
+      "minItems": 1,
+      "maxItems": 2,
+      "items": {
+        "$ref": "scan-result"
+      }
+    },
+    "rollbackTriggered": {
+      "type": "boolean",
+      "description": "true si SecurityGate ejecutó rollback automático en Kubernetes. Solo puede ser true cuando verdict es 'fail'. Siempre presente, nunca null."
+    },
+    "issuedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp ISO 8601 en UTC del momento en que SecurityGate emitió este veredicto."
+    }
+  },
+  "additionalProperties": false
+}
