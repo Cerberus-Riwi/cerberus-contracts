@@ -8,7 +8,7 @@ El versionado sigue [SemVer](https://semver.org/lang/es/): `MAJOR.MINOR.PATCH`.
 
 ---
 
-## [v1.1.0] — AAAA-MM-DD
+## [v1.1.0] — 2026-06-30
 
 Cambio compatible. Formaliza el ajuste de `scan-result` que ya estaba en `main`
 para soportar hallazgos DAST (ZAP).
@@ -33,7 +33,7 @@ para soportar hallazgos DAST (ZAP).
 
 ---
 
-## [v1.0.0] — AAAA-MM-DD
+## [v1.0.0] — 2026-06-30
 
 Versión inicial congelada de los contratos de mensajería sobre RabbitMQ.
 

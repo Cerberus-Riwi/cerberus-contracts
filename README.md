@@ -63,7 +63,7 @@ El rollback en Kubernetes solo se activa cuando `verdict == "fail"`.
 | Tag | Estado | Fecha |
 |---|---|---|
 | v1.0.0 | Reemplazado por v1.1.0 | [completar al hacer merge] |
-| v1.1.0 | Activo | AAAA-MM-DD (completar al crear el tag) |
+| v1.1.0 | Activo | 2026-06-30 |
 
 Cambio v1.0.0 → v1.1.0 (compatible): `filePath` pasa a ser opcional y se agrega
 `locationUrl` para hallazgos DAST (ZAP). Ver [CHANGELOG.md](CHANGELOG.md).

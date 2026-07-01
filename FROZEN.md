@@ -14,11 +14,11 @@ líder técnico, nuevo tag semántico y comunicación al equipo completo antes d
 
 ## v1.1.0 (activa)
 
-Fecha de congelamiento: AAAA-MM-DD  _(completar al crear el tag)_
+Fecha de congelamiento: 2026-06-30
 Tag: v1.1.0
 Tipo de cambio: compatible (minor)
 
-Aprobación de la líder técnica: Ximena Jaramillo Cárdenas — fecha: AAAA-MM-DD  _(completar)_
+Aprobación de la líder técnica: [x] Ximena Jaramillo Cárdenas — fecha: 2026-06-30
 
 ### Cambios respecto de v1.0.0
 
