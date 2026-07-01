@@ -1,0 +1,26 @@
+{
+  "scanId": "a3f2e1d0-1234-4abc-8def-000000000001",
+  "serviceId": "vulnerability-service",
+  "status": "success",
+  "findings": [
+    {
+      "id": "d4e5f6a7-0003-4ccc-dddd-333333333333",
+      "severity": "high",
+      "title": "Cross-Site Scripting (XSS) reflejado en formulario de login",
+      "description": "ZAP detectó que el parámetro 'returnUrl' se refleja sin escapar en la respuesta HTML, permitiendo la ejecución de JavaScript arbitrario en el navegador de la víctima.",
+      "ruleId": "zap.40012",
+      "locationUrl": "https://app.cerberus.dev/login?returnUrl=%3Cscript%3E",
+      "recommendation": "Escapar y validar el parámetro 'returnUrl' antes de reflejarlo en la respuesta. Restringir redirecciones a una lista blanca de rutas internas."
+    },
+    {
+      "id": "e5f6a7b8-0004-4ddd-eeee-444444444444",
+      "severity": "medium",
+      "title": "Cabecera de seguridad Content-Security-Policy ausente",
+      "description": "El endpoint responde sin cabecera Content-Security-Policy, lo que reduce las defensas del navegador frente a XSS e inyección de contenido.",
+      "ruleId": "zap.10038",
+      "locationUrl": "https://app.cerberus.dev/dashboard",
+      "recommendation": "Configurar una cabecera Content-Security-Policy restrictiva en el ingress o en el middleware de la aplicación."
+    }
+  ],
+  "completedAt": "2026-06-18T14:33:20Z"
+}

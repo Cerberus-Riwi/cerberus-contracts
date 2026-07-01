@@ -20,6 +20,7 @@ examples/
     scan-request.example.json
     scan-result.example.json
     scan-result-timeout.example.json
+    scan-result-dast.example.json
     scan-verdict.example.json
 ```
 
@@ -61,7 +62,11 @@ El rollback en Kubernetes solo se activa cuando `verdict == "fail"`.
 
 | Tag | Estado | Fecha |
 |---|---|---|
-| v1.0.0 | Activo | [completar al hacer merge] |
+| v1.0.0 | Reemplazado por v1.1.0 | [completar al hacer merge] |
+| v1.1.0 | Activo | AAAA-MM-DD (completar al crear el tag) |
+
+Cambio v1.0.0 → v1.1.0 (compatible): `filePath` pasa a ser opcional y se agrega
+`locationUrl` para hallazgos DAST (ZAP). Ver [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
