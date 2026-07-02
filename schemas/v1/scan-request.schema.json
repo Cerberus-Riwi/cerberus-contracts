@@ -39,6 +39,11 @@
       "format": "date-time",
       "description": "Timestamp ISO 8601 en UTC del momento en que SecurityGate creó este mensaje. Ejemplo: 2026-06-18T14:30:00Z"
     },
+    "targetUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL de la aplicación desplegada a escanear con OWASP ZAP (DAST). Resuelta del lado del servidor por SecurityGate a partir de un mapeo interno repositorio→URL; ausente cuando el repositorio no tiene un target configurado, en cuyo caso se omite la etapa DAST."
+    },
     "metadata": {
       "type": "object",
       "description": "Campos opcionales de contexto adicional. Nunca requeridos por los servicios consumidores.",

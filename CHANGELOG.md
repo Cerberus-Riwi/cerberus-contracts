@@ -8,6 +8,22 @@ El versionado sigue [SemVer](https://semver.org/lang/es/): `MAJOR.MINOR.PATCH`.
 
 ---
 
+## [v1.2.0] — 2026-07-02
+
+Cambio compatible. Agrega soporte de contrato para la etapa DAST (OWASP ZAP)
+en `scan-request`.
+
+### Added
+- `scan-request.schema.json`: nuevo campo opcional `targetUrl` (`format: uri`),
+  hermano de `requestedAt`. Es la URL de la aplicación desplegada que ZAP debe
+  escanear. SecurityGate la resuelve server-side desde un mapeo interno
+  `repositoryUrl` → `targetUrl` (sin input externo, sin superficie SSRF). Su
+  ausencia significa que el repositorio no tiene target configurado y la etapa
+  DAST se salta. No se agrega a `required` — sigue siendo opcional.
+- `examples/scan-request.example.json`: se incluye un `targetUrl` de ejemplo.
+
+---
+
 ## [v1.1.0] — 2026-06-30
 
 Cambio compatible. Formaliza el ajuste de `scan-result` que ya estaba en `main`
